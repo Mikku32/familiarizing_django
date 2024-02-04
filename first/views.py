@@ -9,12 +9,15 @@ class HelloWorld(APIView):
 
 
     def post(self,request):
-        string1=request.data['message1']
-        string2=request.data['message2']
-        content = {'message': string1+string2}
-        return Response(content)
+        try:
+            string1=request.data['message1']
+            string2=request.data['message2']
+            content = {'message': string1+string2}
+            return Response(content)
+        except:
+            content = {'message': 'Check the json oncemore'}
+            return Response(content)
    
-    
 class Cars(APIView):
     def get(self,request):
         description={
