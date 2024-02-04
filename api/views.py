@@ -11,7 +11,25 @@ class StudentListApiview(APIView):
         students=Student.objects.all() #select * from students
         studentList=[] #empty list
         for i in students:
-            studentList.append({'name':i.name,'roll':i.roll,'course':i.course})
+            studentList.append({
+                'id':i.id,
+                'name':i.name,
+                'roll':i.roll,
+                'course':i.course
+                })
         return Response(studentList)
+    
+    
+class StudentDetailApiview(APIView):
+    def get(self,request,pk):
+        students=Student.objects.get(id=pk)
+        return Response({
+            'id':students.id,
+            'name':students.name,
+            'roll':students.roll,
+            'course':students.course
+            })    
+    
+
             
         

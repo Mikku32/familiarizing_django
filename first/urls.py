@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from first.views import HelloWorld,Cars
-from api.views import StudentListApiview
+from api.views import StudentListApiview,StudentDetailApiview
 
 
 urlpatterns = [
@@ -25,4 +25,6 @@ urlpatterns = [
     path('hello/',HelloWorld.as_view()),
     path('cars/',Cars.as_view()),
     path('students/',StudentListApiview.as_view()),
+    path('students/<int:pk>/',StudentDetailApiview.as_view()),
+
 ]
