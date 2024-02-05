@@ -7,6 +7,9 @@ from api.serializers import StudentSerializer
 
 
 
+from rest_framework import generics
+
+
 # class StudentListApiview(APIView):
 #     def get(self,request):
 #         students=Student.objects.all() #select * from students
@@ -23,11 +26,11 @@ from api.serializers import StudentSerializer
 
 #using serializer example
 
-class StudentListApiview(APIView):
-    def get(self,request):
-        students=Student.objects.all()
-        stdntserlzr=StudentSerializer(students,many=True)  #many=true because we have multiple students
-        return Response(stdntserlzr.data)
+# class StudentListApiview(APIView):
+#     def get(self,request):
+#         students=Student.objects.all()
+#         stdntserlzr=StudentSerializer(students,many=True)  #many=true because we have multiple students
+#         return Response(stdntserlzr.data)
 
 
 
@@ -44,9 +47,21 @@ class StudentListApiview(APIView):
 
     #using serializer example
 
-class StudentDetailApiview(APIView):
-    def get(self,request,pk):
-        stud=Student.objects.get(id=pk)  
-        stdntserlzr=StudentSerializer(stud,many=False)
-        return Response(stdntserlzr.data)          
+# class StudentDetailApiview(APIView):
+#     def get(self,request,pk):
+#         stud=Student.objects.get(id=pk)  
+#         stdntserlzr=StudentSerializer(stud,many=False)
+#         return Response(stdntserlzr.data)          
         
+
+
+
+#simple crud operation example
+
+class StudentListApiview(generics.ListCreateAPIView):   #toget(list) and to create (create)
+    queryset=Student.objects.all()
+    serializer_class=StudentSerializer
+    
+class StudentDetailApiview(generics.RetrieveUpdateDestroyAPIView):
+    queryset=Student.objects.all()
+    serializer_class=StudentSerializer
